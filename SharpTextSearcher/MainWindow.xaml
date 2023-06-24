@@ -1,0 +1,115 @@
+﻿<Window x:Class="SharpTextSearcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpTextSearcher"
+        xmlns:viewModel="clr-namespace:SharpTextSearcher.ViewModel"
+        mc:Ignorable="d"
+        Title="Sharp Text Searcher"
+        Height="510" Width="800" MinHeight="300" MinWidth="300"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
+
+    <Border Background="{DynamicResource BackgroundLevel1}"
+            CornerRadius="20">
+        <Grid x:Name="Grid1" Margin="5,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="0"
+                  Margin="0,0,0,0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="Images/search.png" Margin="10,0,0,0"/>
+
+                <TextBlock Grid.Column="1" VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Foreground="{DynamicResource TextBrush}"
+                           FontWeight="Bold"
+                           Text="Sharp Text Searcher"/>
+
+                <Button x:Name="CloseButton" Grid.Row="0" Grid.Column="4"
+                        Cursor="Hand"
+                        Margin="0,0,0,20"
+                        Background="Transparent"
+                        BorderBrush="Transparent" Click="CloseButton_Click">
+                    <StackPanel>
+                        <Image Source="Images/close.png" Stretch="Uniform"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="MaximButton" Grid.Row="0" Grid.Column="3"
+                        Cursor="Hand"
+                        Margin="0,0,0,20"
+                        Background="Transparent"
+                        BorderBrush="Transparent" Click="MaximButton_Click">
+                    <StackPanel>
+                        <Image Source="Images/maximize.png" Stretch="Uniform"/>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="MinimButton" Grid.Row="0" Grid.Column="2"
+                        Cursor="Hand"
+                        Margin="0,0,0,20"
+                        Background="Transparent"
+                        BorderBrush="Transparent" Click="MinimButton_Click">
+                    <StackPanel>
+                        <Image Source="Images/minimize.png" Stretch="Uniform"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <StackPanel Grid.Row="1">
+                <CheckBox x:Name="ConfigButton"
+                          Cursor="Hand"
+                          Style="{StaticResource CheckBoxButton}"
+                          IsChecked="{Binding ShowConfig}"
+                          Command="{Binding ConfigViewCommand}">
+                    <CheckBox.Tag>
+                        <ImageSource>Images/config.png</ImageSource>
+                    </CheckBox.Tag>
+                </CheckBox>
+            </StackPanel>
+
+
+            <Grid Grid.Row="1" Grid.Column="1"
+                  Margin="0,0,0,0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" MinWidth="100"/>
+                </Grid.ColumnDefinitions>
+                <ContentControl Grid.Column="0"
+                                Content="{Binding LeftView}"
+                                Margin="5">
+                </ContentControl>
+                <ContentControl Grid.Column="1"
+                                Content="{Binding MainView}"
+                                Margin="5">
+                </ContentControl>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

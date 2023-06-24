@@ -1,0 +1,47 @@
+﻿<Application x:Class="SharpTextSearcher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SharpTextSearcher"
+             xmlns:view="clr-namespace:SharpTextSearcher.View"
+             xmlns:viewModel="clr-namespace:SharpTextSearcher.ViewModel"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MyButton.xaml"/> 
+                <ResourceDictionary Source="Theme/CheckBoxButton.xaml"/>
+                <ResourceDictionary Source="Theme/ToggleCheckBox.xaml"/>
+                <ResourceDictionary Source="Theme/MyScrollViewerLevel1.xaml"/>
+                <ResourceDictionary Source="Theme/MyScrollViewerLevel2.xaml"/>
+                <ResourceDictionary Source="Theme/MyTreeView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Converters -->
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+            <!-- Global Colors -->
+            <SolidColorBrush x:Key="TextBrush" Color="DarkSlateGray" />
+            <SolidColorBrush x:Key="BackgroundLevel0" Color="White" />
+            <SolidColorBrush x:Key="BackgroundLevel1" Color="WhiteSmoke" />
+            <SolidColorBrush x:Key="BackgroundLevel2" Color="LightGray" />
+            <SolidColorBrush x:Key="BackgroundLevel3" Color="DarkGray" />
+
+            <!-- FROM https://www.iconsdb.com/ -->
+            <BitmapImage x:Key="ImgDirectory" UriSource="/SharpTextSearcher;component/Images/ImgDirectory.png" />
+            <BitmapImage x:Key="ImgFile" UriSource="/SharpTextSearcher;component/Images/ImgFile.png" />
+            <BitmapImage x:Key="Search" UriSource="/SharpTextSearcher;component/Images/search.png" />
+            <BitmapImage x:Key="Close" UriSource="/SharpTextSearcher;component/Images/close.png" />
+            <BitmapImage x:Key="Maximize" UriSource="/SharpTextSearcher;component/Images/maximize.png" />
+            <BitmapImage x:Key="Minimize" UriSource="/SharpTextSearcher;component/Images/minimize.png" />
+            <BitmapImage x:Key="Config" UriSource="/SharpTextSearcher;component/Images/config.png" />
+
+            <DataTemplate DataType="{x:Type viewModel:SearchViewModel}">
+                <view:SearchView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ConfigViewModel}">
+                <view:ConfigView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

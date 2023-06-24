@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModel="clr-namespace:SharpTextSearcher.ViewModel"
+                    xmlns:model="clr-namespace:SharpTextSearcher.Model">
+
+    <Style BasedOn="{StaticResource {x:Type TreeView}}"
+           TargetType="{x:Type TreeView}"
+           x:Key="MyTreeView">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TreeView">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ScrollViewer" Style="{StaticResource MyScrollViewerLevel1}" Foreground="Black">
+                                <ItemsPresenter>
+
+                                </ItemsPresenter>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="{Binding Expand}" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                        <WrapPanel Orientation="Horizontal">
+                            <Image Height="16" Width="16" Stretch="Fill">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding MatchType}" Value="{x:Static model:MatchType.DIRECTORY}">
+                                                <Setter Property="Source" Value="{DynamicResource ImgDirectory}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding MatchType}" Value="{x:Static model:MatchType.FILE}">
+                                                <Setter Property="Source" Value="{DynamicResource ImgFile}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock viewModel:TextBlockHelper.FormattedText="{Binding NameFormatted}"
+                                       Foreground="{DynamicResource TextBrush}"/>
+                        </WrapPanel>
+                    </HierarchicalDataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+    
+</ResourceDictionary>

@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="SharpTextSearcher.View.ConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SharpTextSearcher"
+             xmlns:viewModel="clr-namespace:SharpTextSearcher.ViewModel"
+             mc:Ignorable="d"
+             Background="Transparent"
+             Width="250">
+
+    <Border Background="{DynamicResource BackgroundLevel2}"
+            CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Text="Configuration"
+                       Margin="20,5,0,0" FontSize="13"
+                       Foreground="{DynamicResource TextBrush}"
+                       FontWeight="Bold"/>
+
+            <Separator Grid.Row="1"
+                       Margin="15,2,15,2"
+                       Background="{DynamicResource TextBrush}"
+                       Height="10"/>
+            <ScrollViewer Grid.Row="2" Margin="0,0,5,30"
+                          Style="{StaticResource MyScrollViewerLevel2}"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical"
+                                DataContext="{Binding SearchConfig}">
+                        <GroupBox Header="Main options" Margin="5,10,5,0"
+                              FontWeight="Bold" FontSize="12"
+                              Foreground="{DynamicResource TextBrush}"
+                              BorderBrush="{DynamicResource TextBrush}"
+                              BorderThickness="1">
+                            <StackPanel Margin="5">
+                                <CheckBox Grid.Row="0" Grid.ColumnSpan="2"
+                                          Content="Use RegEx" Margin="5"
+                                          ToolTip="If enabled, uses regular expressions"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding UseRegularExpression}"/>
+
+                                <CheckBox Grid.Row="1" Grid.ColumnSpan="2"
+                                          Content="Enable case sensivity" Margin="5"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding CaseSensivity}"/>
+
+                                <CheckBox Grid.Row="1" Grid.ColumnSpan="2"
+                                          Content="Allow multi match" Margin="5"
+                                          ToolTip="If enabled, searchs for all occurrences in the line"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding AllowMultiMatch}" Cursor="Hand"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="Search in" Margin="5,10,5,0"
+                                  FontWeight="Bold" FontSize="12"
+                                  Foreground="{DynamicResource TextBrush}"
+                                  BorderBrush="{DynamicResource TextBrush}"
+                                  BorderThickness="1">
+                            <StackPanel Margin="5">
+                                <CheckBox Content="Directory names" Margin="5"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding SearchInDirectoryNames}"/>
+
+                                <CheckBox Content="File names" Margin="5"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding SearchInFileNames}"/>
+
+                                <CheckBox Content="Inside files" Margin="5"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding SearchInsideFiles}"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="View" Margin="5,10,5,0"
+                                  FontWeight="Bold" FontSize="12"
+                                  Foreground="{DynamicResource TextBrush}"
+                                  BorderBrush="{DynamicResource TextBrush}"
+                                  BorderThickness="1">
+                            <StackPanel Margin="5">
+                                <CheckBox Grid.Row="0"
+                                             Content="Auto expand directories" Margin="5"
+                                             FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                             Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                             IsChecked="{Binding ExpandDirectoryItems}"/>
+
+                                <CheckBox Grid.Row="1"
+                                          Content="Auto expand files" Margin="5"
+                                          FontSize="12" FontWeight="Normal"
+                                          Style="{StaticResource ToggleCheckBox}"
+                                          Foreground="{DynamicResource TextBrush}" Background="Transparent"
+                                          IsChecked="{Binding ExpandFileItems}" Cursor="Hand"/>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <TextBlock Grid.Row="0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,5,0,0" FontSize="12">
+                            <Hyperlink NavigateUri="https://github.com/Frai13/SharpTextSearcher/releases"
+                                       RequestNavigate="Hyperlink_RequestNavigate"
+                                       Foreground="{DynamicResource TextBrush}"
+                                       FontWeight="Bold">
+                                <Run Text="{Binding Path=AppVersion, Mode=OneWay}" />
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Button Margin="5,10,5,0"
+                            Height="20" Width="100"
+                            Content="Check Updates"
+                            Style="{StaticResource MyButton}"
+                            Foreground="{DynamicResource TextBrush}"
+                            Command="{Binding CheckUpdatesCommand}"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</UserControl>
